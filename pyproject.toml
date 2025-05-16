@@ -7,7 +7,15 @@ authors = [
     { name = "Charles Azam", email = "azamcharles0@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "pydantic>=2.11.4",
+    "matplotlib>=3.10.3",
+    "numpy>=2.2.5",
+    "pandas>=2.2.3",
+    "pint>=0.24.4",
+    "streamlit>=1.45.1",
+    "typer>=0.15.4",
+]
 
 [project.scripts]
 pyforge = "pyforge:main"
