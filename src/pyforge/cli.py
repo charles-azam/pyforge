@@ -7,6 +7,7 @@ app = typer.Typer(
     context_settings={"help_option_names": ["-h", "--help"]},
 )
 
+
 @app.command(no_args_is_help=True)
 def hello(name: str, formal: bool = False):
     """
@@ -19,12 +20,14 @@ def hello(name: str, formal: bool = False):
     else:
         print(f"Bonjour {name}")
 
+
 @app.command(no_args_is_help=True)
 def goodbye(name: str, farewell: str = "Au revoir"):
     """
     Dit au revoir à NAME avec un message optionnel.
     """
     print(f"{farewell} {name}")
+
 
 if __name__ == "__main__":
     app()

@@ -1,10 +1,12 @@
 import logging
-import coloredlogs
 import os
+
+import coloredlogs
 
 FORMAT = "%(asctime)s %(hostname)s %(name)s:%(lineno)d %(levelname)s %(message)s"
 FIELD_STYLES = coloredlogs.DEFAULT_FIELD_STYLES | {"levelname": {"color": "magenta"}}
 DEFAULT_LOG_LEVEL = logging.INFO
+
 
 def get_logger(name: str, level: int | None = None):
     """
