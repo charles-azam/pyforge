@@ -5,6 +5,9 @@ from beartype import beartype
 import pandas as pd
 import streamlit as st
 
+class DocumentConfig():
+    def __init__(self, title: str, author: str, date: str | None = None, bib_path: Path | None = None):
+        pass
 
 class MultiDisplayer(ABC):
     pass
