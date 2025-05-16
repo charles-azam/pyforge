@@ -1,4 +1,5 @@
 import typer
+from pathlib import Path
 
 app = typer.Typer(
     name="pyforge",
@@ -9,25 +10,26 @@ app = typer.Typer(
 
 
 @app.command(no_args_is_help=True)
-def hello(name: str, formal: bool = False):
+def view(doc_path: Path):
     """
-    Dit bonjour à NAME.
-
-    Si --formal est utilisé, dit bonjour formellement.
+Interactive viewer with autoreload for a document that leverages the power of Streamlit.
     """
-    if formal:
-        print(f"Bonjour Monsieur/Madame {name}")
-    else:
-        print(f"Bonjour {name}")
+    pass
 
 
 @app.command(no_args_is_help=True)
-def goodbye(name: str, farewell: str = "Au revoir"):
+def markdown(doc_path: Path):
     """
-    Dit au revoir à NAME avec un message optionnel.
+Convert a document to plain pandoc markdown.
     """
-    print(f"{farewell} {name}")
+    pass
 
+@app.command(no_args_is_help=True)
+def pdf(doc_path: Path):
+    """
+Convert a document to PDF using pandoc.
+    """
+    pass
 
 if __name__ == "__main__":
     app()
