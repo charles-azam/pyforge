@@ -15,10 +15,13 @@ dependencies = [
     "pint>=0.24.4",
     "streamlit>=1.45.1",
     "typer>=0.15.4",
+    "logging>=0.4.9.6",
+    "coloredlogs>=15.0.1",
+    "pytest>=8.3.5",
 ]
 
 [project.scripts]
-pyforge = "pyforge:main"
+pyforge = "pyforge.cli:app"
 
 [build-system]
 requires = ["hatchling"]
