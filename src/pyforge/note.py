@@ -10,7 +10,7 @@ from typing import Any, List, Optional
 import pandas as pd
 import streamlit as st
 
-from pyforge.logger import get_logger
+from pyforge.common import get_logger
 
 logger = get_logger(__name__)
 
