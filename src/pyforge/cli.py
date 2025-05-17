@@ -8,7 +8,7 @@ from pdb import run
 
 import typer
 
-from pyforge.logger import get_logger
+from pyforge.common import get_logger
 from pyforge.note import (DisplayMode, run_file_with_streamlit,
                           set_markdown_display_mode,
                           unset_markdown_display_mode)
