@@ -719,7 +719,7 @@ dependencies = [
 requires-dist = [
     { name = "black" },
     { name = "coloredlogs" },
-    { name = "gitpython", specifier = ">=3.1.44" },
+    { name = "gitpython" },
     { name = "isort" },
     { name = "logging", specifier = ">=0.4.9.6" },
     { name = "matplotlib" },
