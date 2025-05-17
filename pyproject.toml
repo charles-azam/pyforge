@@ -14,14 +14,10 @@ dependencies = [
     "typer>=0.15.4",
     "logging>=0.4.9.6",
     "pytest>=8.3.5",
-    "gitpython",
     "pandas",
     "coloredlogs",
-    "black",
-    "isort",
     "tabulate",
     "scipy",
-    "numpy",
     "matplotlib",
 ]
 
