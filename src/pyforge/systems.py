@@ -54,11 +54,11 @@ class Function(BaseModel):
 class System(BaseModel):
     name: str = ""
     description: str = ""
-    requirements: list[Requirement] | None = None
-    functions: list[Function] | None = None
-    children: list[System] | None = None
-    parameters: Parameters | None = None  # fixed typo
-    cost: float | None = None
+    requirements: list[Requirement] = []
+    functions: list[Function] = []
+    children: list[System] = []
+    parameters: Parameters = []  # fixed typo
+    cost: float = 0
 
     def add_child(self, system: System):
         """Add a subsystem to the children list."""
