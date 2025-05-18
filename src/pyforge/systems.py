@@ -12,12 +12,19 @@ class Requirement(BaseModel):
     name: str = ""
     description: str = ""
 
+class Function(BaseModel):
+    name: str = ""
+    description: str = ""
+    parameters: Parameters | None = None
+
 
 class System(BaseModel):
     name: str = ""
     description: str = ""
     requirements: list[Requirement] | None = None
+    functions: list[Function] | None = None
     children: list[System] | None = None
+    paremeters: Parameters | None = None
 
     def add_child(self, system: System):
         if self.children is None:
