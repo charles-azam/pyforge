@@ -49,7 +49,7 @@ class Function(BaseModel):
         header = f"### Function: {self.name}"
         desc = self.description or ""
         param_md = ("\n**Parameters:**\n" + self.parameters.display()) if self.parameters else ""
-        return f"{header}\n\n{desc}{param_md}"
+        return f"{header}\n{desc}\n{param_md}" if desc else f"{header}\n{param_md}"
 
 class System(BaseModel):
     name: str = ""
@@ -69,7 +69,7 @@ class System(BaseModel):
 
     def display(self) -> str:
         """Return a markdown representation of this system."""
-        md: list[str] = [f"# System: {self.name}", "", self.description or ""]
+        md: list[str] = [f"# System: {self.name}", self.description or ""]
 
         if self.parameters:
             md.append("\n## Parameters")
