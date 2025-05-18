@@ -31,13 +31,8 @@ df_params = pd.DataFrame([
 display(Table(df_params, "Core design parameters", "tbl-params"))
 
 # 4. System description & requirements
-display(
-    "## System Overview",
-    f"**{heat_pump.name}**: {heat_pump.description}\n"
-)
-
-req_lines = [f"- **{req.name}**: {req.description}" for req in heat_pump.requirements]
-display("## Requirements", *req_lines)
+display("## System Overview")
+display(heat_pump.display())
 
 # 5. Simulation results
 P_el = compute_electrical_input()
