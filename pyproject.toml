@@ -1,7 +1,7 @@
 [project]
 name = "pyforge"
 version = "0.1.0"
-description = "Add your description here"
+description = "Engineering as Code: A Python library for engineering calculations and simulations."
 readme = "README.md"
 authors = [
     { name = "Charles Azam", email = "azamcharles0@gmail.com" }
