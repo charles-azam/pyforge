@@ -34,7 +34,7 @@ def markdown(doc_path: Path, output_path: Path = None):
     """
     if output_path is None:
         output_path = doc_path.with_suffix(".md")
-        output_path.write_text("")
+    output_path.write_text("")
 
     logger.info(f"Converting {doc_path} to markdown at {output_path}")
 
