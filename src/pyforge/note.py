@@ -138,6 +138,7 @@ class DocumentConfig(MultiDisplayer):
             f"date: {self.date}" if self.date else "",
             f"bibliography: {self.bib_path}" if self.bib_path else "",
             "---",
+            "\n"
         ]
         return "\n".join(metadata)
 
@@ -274,12 +275,14 @@ def display(
                 result.append(item)
             else:  # STREAMLIT
                 st.markdown(item)
+        result.append("\n")
+
 
     if display_mode == DisplayMode.MARKDOWN or display_mode == DisplayMode.PYTHON:
         output_string = "\n\n".join(result)
         if out_path is not None:
             # Write to the specified output path
-            with open(out_path, "w") as f:
+            with open(out_path, "a") as f:
                 f.write(output_string)
 
         return output_string
