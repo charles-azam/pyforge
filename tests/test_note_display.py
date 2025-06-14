@@ -21,12 +21,19 @@ def test_document_config_markdown():
 
 
 def test_figure_markdown():
-    fig = Figure(Path("test/path.png"), "Test Caption", "fig:test")
-    markdown = fig.display_markdown()
-    assert "![Test Caption](test/path.png)" in markdown
-    assert "{#fig:test}" in markdown
-
-
+    set_markdown_display_mode(Path("test/doc.md"))
+    try:
+        fig = Figure(Path("test/path.png"), "Test Caption", "fig:test")
+        markdown = fig.display_markdown()
+        assert "![Test Caption](path.png)" in markdown
+        assert "{#fig:test}" in markdown
+    except Exception as e:
+        print(e)
+        raise e
+    finally:
+        unset_markdown_display_mode()
+    
+test_figure_markdown()
 def test_table_markdown():
     data = pd.DataFrame({"A": [1, 2, 3], "B": ["x", "y", "z"]})
     table = Table(data, "Test Table", "tbl:test")

@@ -160,9 +160,44 @@ class Figure(MultiDisplayer):
         self.caption = caption
         self.label = label
 
+    @classmethod
+    def from_matplotlib(cls, fig, filename: str, caption: str, label: str | None = None, dpi: int = 300, bbox_inches: str = "tight") -> "Figure":
+        """
+        Create a Figure instance from a matplotlib figure.
+        
+        Args:
+            fig: matplotlib figure object
+            filename: name of the file to save the figure as
+            caption: caption for the figure
+            label: optional label for referencing the figure
+            dpi: dots per inch for the saved figure
+            bbox_inches: how to handle the figure's bounding box
+            
+        Returns:
+            Figure instance
+        """
+        import matplotlib.pyplot as plt
+        
+        # Get the output path from environment
+        output_path = Path(os.environ.get(OUTPUT_MARKDOWN_PATH, Path.cwd()))
+        if not output_path:
+            raise ValueError("No markdown output path set. Call set_markdown_display_mode first.")
+            
+        # Create figures directory relative to the markdown output
+        figures_dir = output_path.parent / "figures"
+        figures_dir.mkdir(exist_ok=True)
+        
+        # Save the figure
+        filepath = figures_dir / filename
+        fig.savefig(filepath, dpi=dpi, bbox_inches=bbox_inches)
+        plt.close(fig)
+        
+        return cls(filepath, caption, label)
+
     def display_markdown(self) -> str:
         label_text = f"{{#{self.label}}}" if self.label else ""
-        return f"![{self.caption}]({self.path}){label_text}"
+        relative_path = self.path.relative_to(Path(os.environ[OUTPUT_MARKDOWN_PATH]).parent)
+        return f"![{self.caption}]({relative_path}){label_text}"
 
     def display_streamlit(self) -> None:
         st.image(str(self.path), caption=self.caption)

@@ -17,19 +17,6 @@ config = DocumentConfig(
 )
 display(config)
 
-
-# Function to create matplotlib figures and save them
-def create_figure(fig_function, filename, *args, **kwargs):
-    """Create a matplotlib figure, save it to a temporary file, and return the path"""
-    fig = fig_function(*args, **kwargs)
-    temp_dir = Path("docs/figures")
-    temp_dir.mkdir(exist_ok=True)
-    filepath = temp_dir / filename
-    fig.savefig(filepath, dpi=300, bbox_inches="tight")
-    plt.close(fig)
-    return filepath
-
-
 # Function to create a simple harmonic oscillator plot
 def create_sho_plot():
     """Create a simple harmonic oscillator plot"""
@@ -258,12 +245,39 @@ def create_double_pendulum_plot():
 
 
 # Create all the figures
-sho_fig_path = create_figure(create_sho_plot, "simple_harmonic_oscillator.png")
-phase_space_fig_path = create_figure(create_phase_space_plot, "phase_space.png")
-damped_fig_path = create_figure(create_damped_oscillator_plot, "damped_oscillator.png")
-resonance_fig_path = create_figure(create_driven_oscillator_plot, "resonance.png")
-double_pendulum_fig_path = create_figure(
-    create_double_pendulum_plot, "double_pendulum.png"
+sho_fig = Figure.from_matplotlib(
+    create_sho_plot(),
+    "simple_harmonic_oscillator.png",
+    "Position, velocity, and energy of a simple harmonic oscillator",
+    "fig-sho"
+)
+
+phase_space_fig = Figure.from_matplotlib(
+    create_phase_space_plot(),
+    "phase_space.png",
+    "Phase space trajectories for a simple harmonic oscillator at different energy levels",
+    "fig-phase"
+)
+
+damped_fig = Figure.from_matplotlib(
+    create_damped_oscillator_plot(),
+    "damped_oscillator.png",
+    "Response of damped harmonic oscillators with different damping ratios",
+    "fig-damped"
+)
+
+resonance_fig = Figure.from_matplotlib(
+    create_driven_oscillator_plot(),
+    "resonance.png",
+    "Resonance curves for driven harmonic oscillators with different damping ratios",
+    "fig-resonance"
+)
+
+double_pendulum_fig = Figure.from_matplotlib(
+    create_double_pendulum_plot(),
+    "double_pendulum.png",
+    "Trajectory of a double pendulum system",
+    "fig-double-pendulum"
 )
 
 # Create data for the table
@@ -314,11 +328,7 @@ $\\omega_0 = \\sqrt{k/m}$.
 
 The following figure shows the position, velocity, and energy of a simple harmonic 
 oscillator over time:""",
-    Figure(
-        sho_fig_path,
-        "Position, velocity, and energy of a simple harmonic oscillator",
-        "fig-sho",
-    ),
+    sho_fig,
     """As shown in """,
     Reference("fig-sho", "Figure 1"),
     """, the total energy (kinetic + potential) remains constant throughout the motion, 
@@ -327,11 +337,7 @@ while the kinetic and potential energies oscillate out of phase with each other.
     """The dynamics of a harmonic oscillator can be visualized in phase space, where 
 position and velocity form the axes. For a simple harmonic oscillator, the phase 
 space trajectory is an ellipse (or circle if properly normalized):""",
-    Figure(
-        phase_space_fig_path,
-        "Phase space trajectories for a simple harmonic oscillator at different energy levels",
-        "fig-phase",
-    ),
+    phase_space_fig,
     """Each closed curve in """,
     Reference("fig-phase", "Figure 2"),
     """ represents a different energy level of the oscillator. The area enclosed by 
@@ -345,11 +351,7 @@ $$m\\ddot{x} + c\\dot{x} + kx = 0$$
 
 where $c$ is the damping coefficient. The behavior of the system depends on the 
 damping ratio $\\zeta = \\frac{c}{2\\sqrt{km}}$:""",
-    Figure(
-        damped_fig_path,
-        "Response of damped harmonic oscillators with different damping ratios",
-        "fig-damped",
-    ),
+    damped_fig,
     """As shown in """,
     Reference("fig-damped", "Figure 3"),
     """, the system can exhibit underdamped (oscillatory), critically damped, or 
@@ -363,11 +365,7 @@ $$m\\ddot{x} + c\\dot{x} + kx = F_0\\cos(\\omega t)$$
 where $F_0$ is the amplitude of the driving force and $\\omega$ is its frequency. 
 A key phenomenon in driven oscillators is resonance, which occurs when the driving 
 frequency approaches the natural frequency of the system:""",
-    Figure(
-        resonance_fig_path,
-        "Resonance curves for driven harmonic oscillators with different damping ratios",
-        "fig-resonance",
-    ),
+    resonance_fig,
     """As shown in """,
     Reference("fig-resonance", "Figure 4"),
     """, the amplitude of oscillation peaks near the natural frequency, with the peak 
@@ -379,11 +377,7 @@ many fields, from mechanical engineering to electrical circuits.""",
 real-world systems involve coupled oscillators that can display complex dynamics. 
 The double pendulum is a classic example of a system that can exhibit chaotic 
 behavior:""",
-    Figure(
-        double_pendulum_fig_path,
-        "Trajectory of a double pendulum system",
-        "fig-double-pendulum",
-    ),
+    double_pendulum_fig,
     """The double pendulum shown in """,
     Reference("fig-double-pendulum", "Figure 5"),
     """ consists of two pendulums attached end to end. The motion is governed by a 
